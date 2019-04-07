@@ -461,7 +461,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 526514537}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1002702062}
+        m_MethodName: ReturnToMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &526514537
@@ -658,7 +669,6 @@ GameObject:
   m_Component:
   - component: {fileID: 643261988}
   - component: {fileID: 643261990}
-  - component: {fileID: 643261989}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -684,38 +694,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.8563284}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -229.5}
-  m_SizeDelta: {x: 0, y: 459}
+  m_AnchoredPosition: {x: 0, y: -0.000030517578}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &643261989
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 643261987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
 --- !u!222 &643261990
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -843,13 +824,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76d4c06c15c6a7c4e8292488e9ee1555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questionDisplayText: {fileID: 0}
-  scoreDisplayText: {fileID: 0}
-  timeRemainingDisplayText: {fileID: 0}
-  answerButtonObjectPool: {fileID: 0}
-  answerButtonParent: {fileID: 0}
-  questionDisplay: {fileID: 0}
-  roundEndDisplay: {fileID: 0}
+  questionDisplayText: {fileID: 1724959616}
+  scoreDisplayText: {fileID: 629879374}
+  timeRemainingDisplayText: {fileID: 2053154355}
+  answerButtonObjectPool: {fileID: 482133017}
+  answerButtonParent: {fileID: 628289602}
+  questionDisplay: {fileID: 776382367}
+  roundEndDisplay: {fileID: 1458811304}
 --- !u!1 &1229981639
 GameObject:
   m_ObjectHideFlags: 0

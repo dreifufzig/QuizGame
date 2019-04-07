@@ -145,26 +145,28 @@ MonoBehaviour:
   - name: RoundZero
     timeLimitInSeconds: 30
     pointsAddedForCorrectAnswer: 10
-    question:
-    - questionText: Are Lions Carnivors?
+    questions:
+    - questionText: How are you?
+      answers:
+      - answerText: Fine
+        isCorrect: 0
+      - answerText: Bad
+        isCorrect: 0
+      - answerText: Weak
+        isCorrect: 0
+      - answerText: Nazi
+        isCorrect: 1
+    - questionText: Did I nazi that coming?
       answers:
       - answerText: Yes
         isCorrect: 1
       - answerText: No
         isCorrect: 0
-    - questionText: Where do mice live?
+    - questionText: Why?
       answers:
-      - answerText: On the moon
-        isCorrect: 0
-      - answerText: On land
+      - answerText: Why not?
         isCorrect: 1
-      - answerText: In the see
-        isCorrect: 0
-    - questionText: What do frogs eat?
-      answers:
-      - answerText: Flies
-        isCorrect: 1
-      - answerText: Pizza
+      - answerText: Exactly
         isCorrect: 0
 --- !u!4 &292669114
 Transform:
