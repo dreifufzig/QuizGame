@@ -30,8 +30,9 @@ public class GameController : MonoBehaviour {
     {
         dataController = FindObjectOfType<DataController> ();
         currentRoundData = dataController.GetCurrentRoundData ();
-        questionPool = currentRoundData.questions;
-        timeRemaining = currentRoundData.timeLimitInSeconds;
+        // questionPool = currentRoundData.questions;
+        questionPool = readQuestionsFromWeb();
+        // timeRemaining = currentRoundData.timeLimitInSeconds;
         UpdateTimeRemainingDisplay();
 
         playerScore = 0;
@@ -46,6 +47,7 @@ public class GameController : MonoBehaviour {
         RemoveAnswerButtons ();
         QuestionData questionData = questionPool [questionIndex];
         questionDisplayText.text = questionData.questionText;
+        
 
         for (int i = 0; i < questionData.answers.Length; i++) 
         {
