@@ -20,6 +20,7 @@ public class AnswerButton : MonoBehaviour
     {
         answerData = data;
         answerText.text = answerData.answerText;
+        Debug.Log(answerData.answerText);
     }
 
     public void HandleClick()

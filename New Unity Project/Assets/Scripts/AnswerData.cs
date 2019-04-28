@@ -7,5 +7,11 @@ public class AnswerData
 {
     public string answerText;
     public bool isCorrect;
+
+    public AnswerData(string answerText, bool isCorrect)
+    {
+        this.answerText = answerText;
+        this.isCorrect = isCorrect;
+    }
     
 }

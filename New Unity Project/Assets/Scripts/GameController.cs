@@ -28,11 +28,11 @@ public class GameController : MonoBehaviour {
     // Use this for initialization
     void Start () 
     {
-        dataController = FindObjectOfType<DataController> ();
-        currentRoundData = dataController.GetCurrentRoundData ();
+        dataController = FindObjectOfType<DataController>();
+        currentRoundData = dataController.GetCurrentRoundData();
         // questionPool = currentRoundData.questions;
-        questionPool = readQuestionsFromWeb();
-        // timeRemaining = currentRoundData.timeLimitInSeconds;
+        questionPool = QuestionData.readQuestionsFromWeb();
+        timeRemaining = currentRoundData.timeLimitInSeconds;
         UpdateTimeRemainingDisplay();
 
         playerScore = 0;
@@ -45,12 +45,13 @@ public class GameController : MonoBehaviour {
     private void ShowQuestion()
     {
         RemoveAnswerButtons ();
-        QuestionData questionData = questionPool [questionIndex];
+        QuestionData questionData = new QuestionData();
+        questionData = questionPool[questionIndex];
         questionDisplayText.text = questionData.questionText;
-        
 
         for (int i = 0; i < questionData.answers.Length; i++) 
         {
+            Debug.Log("Button wird erstellt");
             GameObject answerButtonGameObject = answerButtonObjectPool.GetObject();
             answerButtonGameObjects.Add(answerButtonGameObject);
             answerButtonGameObject.transform.SetParent(answerButtonParent);

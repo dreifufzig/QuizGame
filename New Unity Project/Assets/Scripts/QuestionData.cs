@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using LitJson;
+using System;
+using System.IO;
 
-
+[System.Serializable]
 public class QuestionData
 {
     public string category;
@@ -13,61 +15,87 @@ public class QuestionData
     public string correctAnswer;
     public string[] incorrectAnswers; 
     public AnswerData[] answers;
-}
 
-
-public class JSONparser
-{
-    public QuestionData[] readQuestionsFromWeb()
+    public QuestionData ()
     {
-        string_url = "https://opentdb.com/api.php?amount=15";
-        WWW www = new WWW(url);
-        yield return www;
+
+    }
+
+    public QuestionData (JsonData jsonvale, int i)
+    {
+        // Json wrapper objects to question objects mapping
+        this.category = jsonvale["results"][i]["category"].ToString();
+        this.type = jsonvale["results"][i]["type"].ToString();
+        this.difficulty = jsonvale["results"][i]["difficulty"].ToString();
+        this.questionText = jsonvale["results"][i]["question"].ToString();
+        this.correctAnswer = jsonvale["results"][i]["correct_answer"].ToString();
+        this.incorrectAnswers = new string[jsonvale["results"][i]["incorrect_answers"].Count + 1];
+
+
+        for(int j = 0; j < jsonvale["results"][i]["incorrect_answers"].Count; j++)
+        {
+            this.incorrectAnswers[j] = jsonvale["results"][i]["incorrect_answers"][j].ToString();
+            Debug.Log(this.incorrectAnswers[j]);
+        }
+
+        System.Random random = new System.Random();
+
+        int correctIndex = random.Next(4) % 4; 
+        this.answers = new AnswerData[this.incorrectAnswers.Length];
+        int answerDataIterator = 0;
+    
+
+        for(int k = 0; k < this.incorrectAnswers.Length; k++)
+        {
+            if(correctIndex == k)
+            {
+                //Debug.Log(this.correctAnswer);
+                //Debug.Log("Korrekte Antwort");
+                AnswerData answerData = new AnswerData(this.correctAnswer, true);
+                this.answers[k] = answerData;
+            }
+            else
+            {
+                //Debug.Log(this.incorrectAnswers[answerDataIterator]);
+                //Debug.Log("Inkorrekte Antwort");
+                AnswerData answerData = new AnswerData(this.incorrectAnswers[answerDataIterator], false);
+                this.answers[k] = answerData;
+                answerDataIterator++;
+            }
+        }
+    }
+ 
+    public static QuestionData[] readQuestionsFromWeb()
+    {
+        int amount = 15;
+        string string_url = "https://opentdb.com/api.php?amount="+ amount +"&type=multiple";
+        WWW www = new WWW(string_url);
         if (www.error != null)
         {
             Debug.Log("ERROR: " + www.error);
-            return null;
         }
 
-        const string jsonString = www.data;
-        QuestionData[] questions;
-
-        // From file to json wrapper object
-        JsonData jsonvale = JsonMapper.ToObject(jsonString);
-        for(int i = 0; i < jsonvale["results"].Count; i++)
+        while(!(www.isDone))
         {
-            // Json wrapper objects to question objects mapping
-            QuestionData question = new QuestionData();
-            question.category = jsonvale[i]["category"].toString();
-            question.type = jsonvale[i]["type"].toString();
-            question.difficulty = jsonvale[i]["difficulty"].toString();
-            question.questionText = jsonvale[i]["question"].toString();
-            question.correctAnswer = jsonvale[i]["correct_answer"].toString();
-            
-            for(int j = 0; j < jsonvale[i]["incorrect_answers"].Length; j++)
-            {
-                question.incorrectAnswers.Add(jsonvale[i][""][j][""].toString());
-            }
 
-            int correctIndex = random.Next(4) % 4; 
-
-            for(int k = 0; k < question.incorrectAnswers.Length; k++)
-            {
-                if(correctIndex == k)
-                {
-                    question.answers.add(correctAnswer, isCorrect = true); 
-                }
-
-                question.answers.add(incorrectAnswers[k], isCorrect = false);
-
-                if(k == question.incorrectAnswers.Count)
-                {
-                    question.answers.add(correctAnswer, isCorrect = true);
-                }
-            }
-
-            questions.Add(question);
         }
-        return questions;
+        if(www.isDone)
+        {
+            string jsonString = www.text;
+            QuestionData[] questions = new QuestionData[amount];
+
+            // From file to json wrapper object
+            JsonData jsonvale = JsonMapper.ToObject(jsonString);
+            for(int i = 0; i < jsonvale["results"].Count; i++)
+            {
+                Debug.Log("Frage");
+                
+                questions[i] = new QuestionData(jsonvale, i);
+            }
+            
+            return questions;
+        }
+        return null;
     }
 }
+
